@@ -9,33 +9,43 @@ def match(c):
 		ci += 1
 
 def S():
-	if stra[ci] == '(':
-		match('(')
+	if stra[ci] == 'a':
+		match('a')
 		S()
-		if stra[ci] != ')':
+		if stra[ci] != 'a':
 			error()
 			return
-		match(')')
+		match('a')
+	elif stra[ci] == 'b':
+		match('b')
 		S()
-	elif stra[ci] in "01":
-		match(stra[ci])
+		if stra[ci] != 'b':
+			error()
+			return
+		match('b')
+	elif stra[ci] in "cd":
+		A()
 	else:
 		error()
-		
+
 def A():
-	if stra[ci] == '0':
-		match('0')
-	elif stra[ci] == '1':
-		match('1')
+	if stra[ci] == 'c':
+		match('c')
+		A()
+		if stra[ci] != 'c':
+			error()
+			return
+		match('c')
+	elif stra[ci] == 'd':
+		match('d')
+	else:
+		error()
 
 def error():
 	global err_count
 	print("Unexpected character", stra[ci])
 	err_count += 1
 
-
-
-#S -> (S)S | 0 | 1
 
 
 stra = input("Enter string: ")
