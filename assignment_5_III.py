@@ -9,26 +9,29 @@ def match(c):
 		ci += 1
 
 def S():
-	if stra[ci] == 'a':
-		match('a')
+	if stra[ci] != 'a':
+		error()
+	match('a')
+	if stra[ci] != 'a':
+		error()
+	match('a')
+	if stra[ci] == 'b':
+		match('b')
 		B()
-		B()
+		if stra[ci] != 'b':
+			error()
+		match('b')
 
 def B():
-	if stra[ci] != 'c':
-		error()
-	match('c')
 	if stra[ci] == 'b':
-		Bp()
-
-def Bp():
-	match('b')
-	S()
-	if stra[ci] != 'b':
+		match('b')
+		B()
+		if stra[ci] != 'b':
+			error()
+		match('b')
+	if stra[ci] != 'a':
 		error()
-	match('b')
-	if stra[ci] == 'b':
-		Bp()
+	match('a')
 
 def error():
 	global err_count
