@@ -8,30 +8,29 @@ def match(c):
 	if ci < len(stra)-1:
 		ci += 1
 
-def S():
-	if stra[ci] != 'a':
-		error()
-	match('a')
-	if stra[ci] != 'a':
-		error()
-	match('a')
-	if stra[ci] == 'b':
-		match('b')
-		B()
-		if stra[ci] != 'b':
-			error()
-		match('b')
+def E():
+	if stra[ci] == '\0':
+		return
+	T()
+	while stra[ci] in "-+":
+		match(stra[ci])
+		T()
 
-def B():
-	if stra[ci] == 'b':
-		match('b')
-		B()
-		if stra[ci] != 'b':
-			error()
-		match('b')
-	if stra[ci] != 'a':
-		error()
-	match('a')
+def T():
+	F()
+	while stra[ci] in "/*%":
+		match(stra[ci])
+		F()
+
+def F():
+	if stra[ci] == '-':
+		match('-')
+	if stra[ci] not in "0123456789":
+		match('(')
+		E()
+		match(')')
+	while stra[ci] in "0123456789":
+		match(stra[ci])
 
 def error():
 	global err_count
@@ -43,7 +42,7 @@ def error():
 stra = input("Enter string: ")
 ci = err_count = 0
 stra = stra.strip() + chr(0)
-S()
+E()
 match(chr(0))
 if err_count == 0:
 	print("Derivation found!")
