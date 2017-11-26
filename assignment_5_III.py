@@ -11,35 +11,24 @@ def match(c):
 def S():
 	if stra[ci] == 'a':
 		match('a')
-		S()
-		if stra[ci] != 'a':
-			error()
-			return
-		match('a')
-	elif stra[ci] == 'b':
-		match('b')
-		S()
-		if stra[ci] != 'b':
-			error()
-			return
-		match('b')
-	elif stra[ci] in "cd":
-		A()
-	else:
-		error()
+		B()
+		B()
 
-def A():
-	if stra[ci] == 'c':
-		match('c')
-		A()
-		if stra[ci] != 'c':
-			error()
-			return
-		match('c')
-	elif stra[ci] == 'd':
-		match('d')
-	else:
+def B():
+	if stra[ci] != 'c':
 		error()
+	match('c')
+	if stra[ci] == 'b':
+		Bp()
+
+def Bp():
+	match('b')
+	S()
+	if stra[ci] != 'b':
+		error()
+	match('b')
+	if stra[ci] == 'b':
+		Bp()
 
 def error():
 	global err_count
